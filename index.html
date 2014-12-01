@@ -1,134 +1,136 @@
-        <!DOCTYPE html>
-        <meta charset="utf-8">
-        <body> 
- <style>
-.link {
-stroke: #666;
-opacity: 0.6;
-stroke-width: 1.5px;
-}
-.node circle {
-stroke: #fff;
-opacity: 0.6;
-stroke-width: 1.5px;
-}
-text {
-font: 7px serif;
-opacity: 0.6;
-pointer-events: none;
-}
-</style>
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+<head>
 
-<script src=http://d3js.org/d3.v3.min.js></script>
+<link rel='stylesheet' href=//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.css>
+ <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js' type='text/javascript'></script>
+    <script src='//d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.js' type='text/javascript'></script>
+    <script src='//nvd3.org/assets/lib/fisheye.js' type='text/javascript'></script>
+    
+  <style>
+  .rChart {
+    display: block;
+    margin-left: auto; 
+    margin-right: auto;
+    width: 800px;
+    height: 400px;
+  }  
+  </style>
+</head>
+<body>
 
-<script> 
- var links = [ { "source" : 1, "target" : 2 }, { "source" : 3, "target" : 4 }, { "source" : 5, "target" : 4 }, { "source" : 6, "target" : 4 }, { "source" : 7, "target" : 4 }, { "source" : 8, "target" : 4 }, { "source" : 9, "target" : 10 }, { "source" : 9, "target" : 11 }, { "source" : 12, "target" : 13 }, { "source" : 14, "target" : 14 }, { "source" : 14, "target" : 15 }, { "source" : 16, "target" : 17 }, { "source" : 18, "target" : 17 }, { "source" : 16, "target" : 19 }, { "source" : 18, "target" : 19 }, { "source" : 20, "target" : 21 }, { "source" : 22, "target" : 23 }, { "source" : 24, "target" : 25 }, { "source" : 26, "target" : 27 }, { "source" : 26, "target" : 28 }, { "source" : 26, "target" : 29 }, { "source" : 26, "target" : 17 }, { "source" : 30, "target" : 31 }, { "source" : 32, "target" : 33 }, { "source" : 34, "target" : 33 }, { "source" : 35, "target" : 33 }, { "source" : 36, "target" : 37 }, { "source" : 38, "target" : 38 }, { "source" : 39, "target" : 38 }, { "source" : 38, "target" : 40 }, { "source" : 39, "target" : 40 }, { "source" : 41, "target" : 42 }, { "source" : 43, "target" : 44 }, { "source" : 43, "target" : 28 }, { "source" : 45, "target" : 46 }, { "source" : 45, "target" : 47 }, { "source" : 45, "target" : 48 }, { "source" : 49, "target" : 50 }, { "source" : 51, "target" : 52 }, { "source" : 53, "target" : 54 }, { "source" : 55, "target" : 55 }, { "source" : 55, "target" : 31 }, { "source" : 55, "target" : 56 }, { "source" : 31, "target" : 55 }, { "source" : 31, "target" : 31 }, { "source" : 31, "target" : 56 }, { "source" : 56, "target" : 55 }, { "source" : 56, "target" : 31 }, { "source" : 56, "target" : 56 }, { "source" : 55, "target" : 57 }, { "source" : 55, "target" : 29 }, { "source" : 31, "target" : 57 }, { "source" : 31, "target" : 29 }, { "source" : 56, "target" : 57 }, { "source" : 56, "target" : 29 }, { "source" : 58, "target" : 59 }, { "source" : 60, "target" : 52 }, { "source" : 61, "target" : 62 }, { "source" : 63, "target" : 62 }, { "source" : 64, "target" : 29 }, { "source" : 64, "target" : 65 }, { "source" : 64, "target" : 17 }, { "source" : 64, "target" : 17 }, { "source" : 64, "target" : 17 }, { "source" : 64, "target" : 66 }, { "source" : 64, "target" : 67 }, { "source" : 54, "target" : 28 }, { "source" : 68, "target" : 42 }, { "source" : 69, "target" : 42 }, { "source" : 68, "target" : 46 }, { "source" : 68, "target" : 47 }, { "source" : 68, "target" : 48 }, { "source" : 69, "target" : 46 }, { "source" : 69, "target" : 47 }, { "source" : 69, "target" : 48 }, { "source" : 70, "target" : 71 }, { "source" : 70, "target" : 41 }, { "source" : 25, "target" : 72 }, { "source" : 73, "target" : 17 }, { "source" : 73, "target" : 74 }, { "source" : 44, "target" : 28 }, { "source" : 75, "target" : 76 }, { "source" : 77, "target" : 17 }, { "source" : 78, "target" : 17 }, { "source" : 79, "target" : 80 }, { "source" : 79, "target" : 81 }, { "source" : 79, "target" : 82 }, { "source" : 78, "target" : 81 }, { "source" : 78, "target" : 82 }, { "source" : 83, "target" : 81 }, { "source" : 83, "target" : 82 }, { "source" : 84, "target" : 85 }, { "source" : 84, "target" : 86 }, { "source" : 72, "target" : 87 }, { "source" : 72, "target" : 88 }, { "source" : 72, "target" : 2 }, { "source" : 72, "target" : 42 }, { "source" : 89, "target" : 58 }, { "source" : 89, "target" : 68 }, { "source" : 89, "target" : 69 }, { "source" : 89, "target" : 2 }, { "source" : 27, "target" : 28 }, { "source" : 90, "target" : 91 }, { "source" : 23, "target" : 92 }, { "source" : 93, "target" : 28 }, { "source" : 93, "target" : 28 }, { "source" : 93, "target" : 29 }, { "source" : 94, "target" : 95 }, { "source" : 96, "target" : 97 }, { "source" : 98, "target" : 99 }, { "source" : 98, "target" : 100 }, { "source" : 99, "target" : 99 }, { "source" : 99, "target" : 100 }, { "source" : 98, "target" : 55 }, { "source" : 98, "target" : 31 }, { "source" : 98, "target" : 56 }, { "source" : 99, "target" : 55 }, { "source" : 99, "target" : 31 }, { "source" : 99, "target" : 56 }, { "source" : 101, "target" : 84 }, { "source" : 102, "target" : 84 }, { "source" : 101, "target" : 76 }, { "source" : 101, "target" : 103 }, { "source" : 102, "target" : 76 }, { "source" : 102, "target" : 103 }, { "source" : 101, "target" : 81 }, { "source" : 102, "target" : 81 }, { "source" : 104, "target" : 42 }, { "source" : 105, "target" : 106 }, { "source" : 105, "target" : 1 }, { "source" : 107, "target" : 108 }, { "source" : 109, "target" : 14 }, { "source" : 110, "target" : 111 }, { "source" : 112, "target" : 26 }, { "source" : 112, "target" : 29 }, { "source" : 112, "target" : 17 }, { "source" : 113, "target" : 114 }, { "source" : 115, "target" : 42 }, { "source" : 116, "target" : 28 }, { "source" : 117, "target" : 28 }, { "source" : 116, "target" : 17 }, { "source" : 117, "target" : 17 }, { "source" : 57, "target" : 55 }, { "source" : 57, "target" : 31 }, { "source" : 57, "target" : 56 }, { "source" : 29, "target" : 55 }, { "source" : 29, "target" : 31 }, { "source" : 29, "target" : 56 }, { "source" : 118, "target" : 119 }, { "source" : 120, "target" : 17 }, { "source" : 121, "target" : 17 }, { "source" : 122, "target" : 15 }, { "source" : 28, "target" : 59 }, { "source" : 28, "target" : 27 }, { "source" : 28, "target" : 29 }, { "source" : 28, "target" : 123 }, { "source" : 28, "target" : 28 }, { "source" : 124, "target" : 10 }, { "source" : 124, "target" : 11 }, { "source" : 108, "target" : 14 }, { "source" : 125, "target" : 19 }, { "source" : 31, "target" : 31 }, { "source" : 126, "target" : 31 }, { "source" : 31, "target" : 19 }, { "source" : 126, "target" : 19 }, { "source" : 31, "target" : 31 }, { "source" : 31, "target" : 127 }, { "source" : 128, "target" : 31 }, { "source" : 128, "target" : 127 }, { "source" : 31, "target" : 17 }, { "source" : 31, "target" : 66 }, { "source" : 128, "target" : 17 }, { "source" : 128, "target" : 66 }, { "source" : 31, "target" : 55 }, { "source" : 31, "target" : 31 }, { "source" : 31, "target" : 56 }, { "source" : 129, "target" : 130 }, { "source" : 129, "target" : 131 }, { "source" : 129, "target" : 132 }, { "source" : 129, "target" : 133 }, { "source" : 29, "target" : 26 }, { "source" : 65, "target" : 26 }, { "source" : 29, "target" : 26 }, { "source" : 65, "target" : 26 }, { "source" : 29, "target" : 28 }, { "source" : 65, "target" : 28 }, { "source" : 29, "target" : 28 }, { "source" : 65, "target" : 28 }, { "source" : 29, "target" : 28 }, { "source" : 65, "target" : 28 }, { "source" : 29, "target" : 29 }, { "source" : 65, "target" : 29 }, { "source" : 29, "target" : 134 }, { "source" : 65, "target" : 134 }, { "source" : 29, "target" : 17 }, { "source" : 65, "target" : 17 }, { "source" : 29, "target" : 19 }, { "source" : 65, "target" : 19 }, { "source" : 135, "target" : 42 }, { "source" : 92, "target" : 136 }, { "source" : 92, "target" : 137 }, { "source" : 92, "target" : 138 }, { "source" : 139, "target" : 137 }, { "source" : 139, "target" : 138 }, { "source" : 140, "target" : 137 }, { "source" : 140, "target" : 138 }, { "source" : 141, "target" : 42 }, { "source" : 142, "target" : 42 }, { "source" : 141, "target" : 2 }, { "source" : 142, "target" : 2 }, { "source" : 33, "target" : 143 }, { "source" : 33, "target" : 144 }, { "source" : 145, "target" : 15 }, { "source" : 146, "target" : 74 }, { "source" : 147, "target" : 95 }, { "source" : 148, "target" : 95 }, { "source" : 147, "target" : 42 }, { "source" : 148, "target" : 42 }, { "source" : 149, "target" : 26 }, { "source" : 149, "target" : 116 }, { "source" : 149, "target" : 117 }, { "source" : 149, "target" : 29 }, { "source" : 149, "target" : 17 }, { "source" : 149, "target" : 123 }, { "source" : 149, "target" : 150 }, { "source" : 149, "target" : 17 }, { "source" : 149, "target" : 19 }, { "source" : 151, "target" : 59 }, { "source" : 151, "target" : 152 }, { "source" : 153, "target" : 44 }, { "source" : 59, "target" : 68 }, { "source" : 59, "target" : 69 }, { "source" : 154, "target" : 155 }, { "source" : 156, "target" : 155 }, { "source" : 157, "target" : 45 }, { "source" : 157, "target" : 158 }, { "source" : 157, "target" : 13 }, { "source" : 159, "target" : 28 }, { "source" : 160, "target" : 161 }, { "source" : 123, "target" : 159 }, { "source" : 150, "target" : 159 }, { "source" : 123, "target" : 123 }, { "source" : 150, "target" : 123 }, { "source" : 95, "target" : 95 }, { "source" : 162, "target" : 151 }, { "source" : 163, "target" : 32 }, { "source" : 163, "target" : 34 }, { "source" : 163, "target" : 35 }, { "source" : 163, "target" : 2 }, { "source" : 164, "target" : 165 }, { "source" : 166, "target" : 167 }, { "source" : 166, "target" : 168 }, { "source" : 15, "target" : 14 }, { "source" : 15, "target" : 95 }, { "source" : 15, "target" : 15 }, { "source" : 15, "target" : 42 }, { "source" : 169, "target" : 55 }, { "source" : 169, "target" : 31 }, { "source" : 169, "target" : 56 }, { "source" : 170, "target" : 55 }, { "source" : 170, "target" : 31 }, { "source" : 170, "target" : 56 }, { "source" : 169, "target" : 57 }, { "source" : 169, "target" : 29 }, { "source" : 170, "target" : 57 }, { "source" : 170, "target" : 29 }, { "source" : 171, "target" : 26 }, { "source" : 171, "target" : 28 }, { "source" : 171, "target" : 59 }, { "source" : 171, "target" : 123 }, { "source" : 171, "target" : 150 }, { "source" : 171, "target" : 17 }, { "source" : 171, "target" : 19 }, { "source" : 172, "target" : 173 }, { "source" : 134, "target" : 26 }, { "source" : 174, "target" : 175 }, { "source" : 176, "target" : 177 }, { "source" : 178, "target" : 179 }, { "source" : 17, "target" : 28 }, { "source" : 17, "target" : 29 }, { "source" : 17, "target" : 29 }, { "source" : 17, "target" : 17 }, { "source" : 17, "target" : 31 }, { "source" : 17, "target" : 127 }, { "source" : 66, "target" : 31 }, { "source" : 66, "target" : 127 }, { "source" : 17, "target" : 29 }, { "source" : 17, "target" : 65 }, { "source" : 66, "target" : 29 }, { "source" : 66, "target" : 65 }, { "source" : 17, "target" : 134 }, { "source" : 66, "target" : 134 }, { "source" : 17, "target" : 17 }, { "source" : 17, "target" : 180 }, { "source" : 66, "target" : 17 }, { "source" : 66, "target" : 180 }, { "source" : 181, "target" : 182 }, { "source" : 183, "target" : 167 }, { "source" : 183, "target" : 168 }, { "source" : 184, "target" : 167 }, { "source" : 184, "target" : 168 }, { "source" : 76, "target" : 162 }, { "source" : 76, "target" : 76 }, { "source" : 103, "target" : 162 }, { "source" : 103, "target" : 76 }, { "source" : 76, "target" : 137 }, { "source" : 76, "target" : 138 }, { "source" : 185, "target" : 137 }, { "source" : 185, "target" : 138 }, { "source" : 76, "target" : 76 }, { "source" : 185, "target" : 76 }, { "source" : 186, "target" : 28 }, { "source" : 167, "target" : 29 }, { "source" : 167, "target" : 65 }, { "source" : 187, "target" : 188 }, { "source" : 189, "target" : 141 }, { "source" : 189, "target" : 142 }, { "source" : 189, "target" : 2 }, { "source" : 190, "target" : 191 }, { "source" : 192, "target" : 162 }, { "source" : 192, "target" : 76 }, { "source" : 192, "target" : 192 }, { "source" : 192, "target" : 193 }, { "source" : 192, "target" : 162 }, { "source" : 192, "target" : 76 }, { "source" : 192, "target" : 192 }, { "source" : 192, "target" : 193 }, { "source" : 194, "target" : 58 }, { "source" : 195, "target" : 58 }, { "source" : 196, "target" : 58 }, { "source" : 197, "target" : 58 }, { "source" : 19, "target" : 27 }, { "source" : 19, "target" : 28 }, { "source" : 19, "target" : 28 }, { "source" : 19, "target" : 29 }, { "source" : 19, "target" : 65 }, { "source" : 19, "target" : 17 }, { "source" : 74, "target" : 33 }, { "source" : 42, "target" : 37 }, { "source" : 198, "target" : 199 }, { "source" : 198, "target" : 200 }, { "source" : 198, "target" : 198 }, { "source" : 136, "target" : 201 }, { "source" : 136, "target" : 24 }, { "source" : 136, "target" : 81 }, { "source" : 136, "target" : 59 }, { "source" : 136, "target" : 59 }, { "source" : 202, "target" : 41 }, { "source" : 202, "target" : 53 }, { "source" : 202, "target" : 17 }, { "source" : 202, "target" : 203 }, { "source" : 202, "target" : 204 }, { "source" : 202, "target" : 205 }, { "source" : 18, "target" : 29 }, { "source" : 18, "target" : 17 }, { "source" : 18, "target" : 17 }, { "source" : 18, "target" : 54 }, { "source" : 18, "target" : 31 }, { "source" : 18, "target" : 127 }, { "source" : 206, "target" : 28 }, { "source" : 207, "target" : 134 }, { "source" : 208, "target" : 134 }, { "source" : 209, "target" : 28 }, { "source" : 210, "target" : 141 }, { "source" : 210, "target" : 142 }, { "source" : 210, "target" : 211 }, { "source" : 155, "target" : 107 }, { "source" : 212, "target" : 88 }, { "source" : 212, "target" : 2 }, { "source" : 2, "target" : 88 }, { "source" : 2, "target" : 2 }, { "source" : 213, "target" : 214 }, { "source" : 215, "target" : 216 }, { "source" : 217, "target" : 1 }, { "source" : 218, "target" : 1 }, { "source" : 219, "target" : 1 }, { "source" : 220, "target" : 1 }, { "source" : 221, "target" : 1 }, { "source" : 222, "target" : 1 }, { "source" : 223, "target" : 1 }, { "source" : 217, "target" : 180 }, { "source" : 217, "target" : 217 }, { "source" : 218, "target" : 180 }, { "source" : 218, "target" : 217 }, { "source" : 219, "target" : 180 }, { "source" : 219, "target" : 217 }, { "source" : 220, "target" : 180 }, { "source" : 220, "target" : 217 }, { "source" : 221, "target" : 180 }, { "source" : 221, "target" : 217 }, { "source" : 222, "target" : 180 }, { "source" : 222, "target" : 217 }, { "source" : 223, "target" : 180 }, { "source" : 223, "target" : 217 }, { "source" : 224, "target" : 224 }, { "source" : 180, "target" : 180 }, { "source" : 180, "target" : 217 }, { "source" : 217, "target" : 180 }, { "source" : 217, "target" : 217 }, { "source" : 225, "target" : 180 }, { "source" : 225, "target" : 217 }, { "source" : 226, "target" : 135 }, { "source" : 226, "target" : 227 }, { "source" : 78, "target" : 78 }, { "source" : 78, "target" : 228 }, { "source" : 81, "target" : 84 }, { "source" : 229, "target" : 19 }, { "source" : 230, "target" : 231 }, { "source" : 232, "target" : 233 }, { "source" : 232, "target" : 165 }, { "source" : 234, "target" : 28 }, { "source" : 234, "target" : 1 }, { "source" : 234, "target" : 191 }, { "source" : 234, "target" : 42 }, { "source" : 235, "target" : 2 }, { "source" : 236, "target" : 237 }, { "source" : 236, "target" : 238 }, { "source" : 67, "target" : 239 }, { "source" : 240, "target" : 95 }, { "source" : 205, "target" : 1 }, { "source" : 2, "target" : 72 } ] ; 
- var nodes = {}
+<div id = 'chart246859f23eb' class = 'rChart nvd3'></div>
+<script type='text/javascript'>
+ $(document).ready(function(){
+      drawchart246859f23eb()
+    });
+    function drawchart246859f23eb(){  
+      var opts = {
+ "dom": "chart246859f23eb",
+"width":    800,
+"height":    400,
+"x": "jahr",
+"y": "Teilnahme",
+"group": "part",
+"type": "multiBarChart",
+"id": "chart246859f23eb" 
+},
+        data = [
+ {
+ "jahr": "2008",
+"Teilnahme":  7.76084251758,
+"Nichtteilnahme": 92.23915748242,
+"part": "Demonstration" 
+},
+{
+ "jahr": "2010",
+"Teilnahme": 8.168624560948,
+"Nichtteilnahme": 91.83137543905,
+"part": "Demonstration" 
+},
+{
+ "jahr": "2012",
+"Teilnahme": 8.699116658938,
+"Nichtteilnahme": 91.30088334106,
+"part": "Demonstration" 
+},
+{
+ "jahr": "2008",
+"Teilnahme": 28.76087625336,
+"Nichtteilnahme": 71.23912374664,
+"part": "Unterschriftensammlung" 
+},
+{
+ "jahr": "2010",
+"Teilnahme": 29.43244272772,
+"Nichtteilnahme": 70.56755727228,
+"part": "Unterschriftensammlung" 
+},
+{
+ "jahr": "2012",
+"Teilnahme": 33.72914741454,
+"Nichtteilnahme": 66.27085258546,
+"part": "Unterschriftensammlung" 
+} 
+]
+  
+      if(!(opts.type==="pieChart" || opts.type==="sparklinePlus" || opts.type==="bulletChart")) {
+        var data = d3.nest()
+          .key(function(d){
+            //return opts.group === undefined ? 'main' : d[opts.group]
+            //instead of main would think a better default is opts.x
+            return opts.group === undefined ? opts.y : d[opts.group];
+          })
+          .entries(data);
+      }
+      
+      if (opts.disabled != undefined){
+        data.map(function(d, i){
+          d.disabled = opts.disabled[i]
+        })
+      }
+      
+      nv.addGraph(function() {
+        var chart = nv.models[opts.type]()
+          .width(opts.width)
+          .height(opts.height)
+          
+        if (opts.type != "bulletChart"){
+          chart
+            .x(function(d) { return d[opts.x] })
+            .y(function(d) { return d[opts.y] })
+        }
+          
+         
+        chart
+  .tooltipContent( function(key, x, y){
+        return '<h3>' + key + '</h3>' + 
+        '<p>' + y + ' Prozent im Jahr ' + x + '</p>'
+        } )
+          
+        chart.xAxis
+  .axisLabel("Erhebungsjahr")
 
-// Compute the distinct nodes from the links.
-links.forEach(function(link) {
-link.source = nodes[link.source] ||
-(nodes[link.source] = {name: link.source});
-link.target = nodes[link.target] ||
-(nodes[link.target] = {name: link.target});
-link.value = +link.value;
-});
+        
+        
+        chart.yAxis
+  .axisLabel("Beteiligungsanteil in Prozent")
+  .width(    62)
+      
+       d3.select("#" + opts.id)
+        .append('svg')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
 
-var width = 900
-height = 600;
-
-var force = d3.layout.force()
-.nodes(d3.values(nodes))
-.links(links)
-.size([width, height])
-.linkDistance(50)
-.charge(-200)
-.on("tick", tick)
-.start();
-
-var svg = d3.select("body").append("svg")
-.attr("width", width)
-.attr("height", height);
-
-var link = svg.selectAll(".link")
-.data(force.links())
-.enter().append("line")
-.attr("class", "link");
-
-var node = svg.selectAll(".node")
-.data(force.nodes())
-.enter().append("g")
-.attr("class", "node")
-.on("mouseover", mouseover)
-.on("mouseout", mouseout)
-.on("click", click)
-.on("dblclick", dblclick)
-.call(force.drag);
-
-node.append("circle")
-.attr("r", 8)
-.style("fill", "#3182bd");
-
-node.append("text")
-.attr("x", 12)
-.attr("dy", ".35em")
-.style("fill", "#3182bd")
-.text(function(d) { return d.name; });
-
-function tick() {
-link
-.attr("x1", function(d) { return d.source.x; })
-.attr("y1", function(d) { return d.source.y; })
-.attr("x2", function(d) { return d.target.x; })
-.attr("y2", function(d) { return d.target.y; });
-
-node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-}
-
-function mouseover() {
-d3.select(this).select("circle").transition()
-.duration(750)
-.attr("r", 16);
-}
-
-function mouseout() {
-d3.select(this).select("circle").transition()
-.duration(750)
-.attr("r", 8);
-}
-// action to take on mouse click
-function click() {
-d3.select(this).select("text").transition()
-.duration(750)
-.attr("x", 22)
-.style("stroke-width", ".5px")
-.style("opacity", 1)
-.style("fill", "#E34A33")
-.style("font", "17.5px serif");
-d3.select(this).select("circle").transition()
-.duration(750)
-.style("fill", "#E34A33")
-.attr("r", 16)
-}
-
-// action to take on mouse double click
-function dblclick() {
-d3.select(this).select("circle").transition()
-.duration(750)
-.attr("r", 6)
-.style("fill", "#E34A33");
-d3.select(this).select("text").transition()
-.duration(750)
-.attr("x", 12)
-.style("stroke", "none")
-.style("fill", "#E34A33")
-.style("stroke", "none")
-.style("opacity", 0.6)
-.style("font", "7px serif");
-}
-
+       nv.utils.windowResize(chart.update);
+       return chart;
+      });
+    };
 </script>
-
- <script></script>  
- </body>
+    
+    <script></script>    
+</body>
 </html>
